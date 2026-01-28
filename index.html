@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo Eros - Diálogo com Thaía</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho do Chat -->
+        <div class="chat-header">
+            <div class="avatar">
+                <img src="assets/thaia-avatar.jpg" alt="Thaía" id="avatar-img">
+                <div class="online-dot"></div>
+            </div>
+            <div class="header-info">
+                <h1>Thaía</h1>
+                <p class="subtitle">Cientista do Projeto Eros</p>
+                <div class="status">
+                    <span class="typing-indicator" id="typing">digitando...</span>
+                    <span class="affinity" id="affinity-score">Afinidade: 0%</span>
+                </div>
+            </div>
+            <button class="restart-btn" id="restart-btn" title="Reiniciar conversa">
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
+
+        <!-- Área de Conversa -->
+        <div class="chat-container" id="chat-container">
+            <!-- Mensagens serão inseridas aqui via JavaScript -->
+            <div class="message character initial">
+                <div class="message-avatar">
+                    <img src="assets/thaia-avatar.jpg" alt="Thaía">
+                </div>
+                <div class="message-content">
+                    <p class="text">Olá. Eu sou Thaía, responsável pelos aspectos científicos do Protocolo Eros. Você parece... diferente dos outros recrutas. Vamos testar sua compatibilidade?</p>
+                    <span class="time">19:30</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área de Escolhas -->
+        <div class="choices-container" id="choices-container">
+            <div class="choices-header">
+                <i class="fas fa-code-branch"></i>
+                <span>ESCOLHA SUA RESPOSTA</span>
+            </div>
+            <div class="choices" id="choices">
+                <!-- Opções serão inseridas aqui via JavaScript -->
+                <button class="choice-btn" data-choice="1" data-next="scene1">
+                    <span class="choice-number">A</span>
+                    <span class="choice-text">Estou pronto. O que preciso fazer?</span>
+                </button>
+                <button class="choice-btn" data-choice="2" data-next="scene2">
+                    <span class="choice-number">B</span>
+                    <span class="choice-text">Por que eu seria diferente? Explique melhor.</span>
+                </button>
+                <button class="choice-btn" data-choice="3" data-next="scene3">
+                    <span class="choice-number">C</span>
+                    <span class="choice-text">Estou desconfiado. Isso é seguro?</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Barra de Progresso -->
+        <div class="progress-container">
+            <div class="progress-header">
+                <span>PROGRESSO DO PROTOCOLO</span>
+                <span id="scene-counter">Cena 1/7</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 14%"></div>
+            </div>
+            <div class="progress-labels">
+                <span>Início</span>
+                <span>Conclusão</span>
+            </div>
+        </div>
+
+        <!-- Rodapé com QR de Retorno -->
+        <div class="footer">
+            <div class="qr-section">
+                <div class="qr-code">
+                    <!-- Espaço para QR Code de retorno ao livro -->
+                    <div class="qr-placeholder">
+                        <i class="fas fa-qrcode"></i>
+                        <p>Scan para voltar ao livro</p>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <h3>Protocolo Eros - Experiência Interativa</h3>
+                    <p>Este diálogo afetará seu relacionamento com Thaía na história principal.</p>
+                    <p class="copyright">© Protocolo Eros - Todos os caminhos levam a diferentes verdades.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Final -->
+    <div class="modal" id="ending-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="ending-title">PROTOCOLO CONCLUÍDO</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="ending-icon" id="ending-icon">
+                    <i class="fas fa-dna"></i>
+                </div>
+                <h3 id="ending-subtitle">Compatibilidade Avaliada</h3>
+                <p id="ending-text">Sua interação com Thaía foi registrada nos arquivos do Protocolo.</p>
+                
+                <div class="ending-stats">
+                    <div class="stat">
+                        <span class="stat-label">Afinidade com Thaía</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill" id="final-affinity-bar"></div>
+                        </div>
+                        <span class="stat-value" id="final-affinity">0%</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Decisões Tomadas</span>
+                        <span class="stat-value" id="total-choices">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Final Alcançado</span>
+                        <span class="stat-value" id="ending-type">Neutro</span>
+                    </div>
+                </div>
+                
+                <div class="ending-actions">
+                    <button class="share-btn" id="share-btn">
+                        <i class="fas fa-share-alt"></i> Compartilhar Resultado
+                    </button>
+                    <button class="restart-main-btn" id="restart-main-btn">
+                        <i class="fas fa-redo"></i> Conversar Novamente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <!-- Google Analytics (opcional) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-XXXXX-Y');
+    </script>
+</body>
+</html>
