@@ -1,5 +1,5 @@
 // Dados da história de Thalía
-const thaliaStory = {
+const thalíaStory = {
     currentScene: "start",
     affinity: 0,
     choicesMade: 0,
