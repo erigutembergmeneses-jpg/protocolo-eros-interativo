@@ -1,578 +1,474 @@
-// Dados da história de Thalía
-const thalíaStory = {
-    currentScene: "start",
+// Dados do jogo
+const gameData = {
+    currentScene: 0,
     affinity: 0,
+    maxScenes: 7,
     choicesMade: 0,
-    totalScenes: 7,
-    scenes: {
-        "start": {
-            message: "Olá. Eu sou Thalía, responsável pelos aspectos científicos do Protocolo Eros. Você parece... diferente dos outros recrutas. Vamos testar sua compatibilidade?",
+    playerName: "Recruta",
+    
+    scenes: [
+        {
+            id: "start",
+            message: "Olá. Eu sou Talhía, responsável pelos aspectos científicos do Protocolo Eros. Você parece... diferente dos outros recrutas. Vamos testar sua compatibilidade?",
+            time: "19:30",
             choices: [
                 {
                     text: "Estou pronto. O que preciso fazer?",
-                    next: "scene1",
-                    points: 10,
-                    playerMessage: "Estou pronto. O que preciso fazer?"
+                    nextScene: "scene1",
+                    affinityChange: 5
                 },
                 {
                     text: "Por que eu seria diferente? Explique melhor.",
-                    next: "scene2",
-                    points: 5,
-                    playerMessage: "Por que eu seria diferente? Explique melhor."
+                    nextScene: "scene2",
+                    affinityChange: 0
                 },
                 {
                     text: "Estou desconfiado. Isso é seguro?",
-                    next: "scene3",
-                    points: 0,
-                    playerMessage: "Estou desconfiado. Isso é seguro?"
+                    nextScene: "scene3",
+                    affinityChange: -5
                 }
             ]
         },
-        "scene1": {
-            message: "Excelente atitude. Primeiro, preciso medir suas respostas neurais. Observe esta sequência de símbolos... O que você sente?",
+        {
+            id: "scene1",
+            message: "Excelente atitude! O Protocolo Eros analisa compatibilidade emocional e química através de respostas subconscientes. Primeiro teste: imagine um campo aberto ao pôr do sol. O que você sente?",
+            time: "19:32",
             choices: [
                 {
-                    text: "Uma calma estranha, como se já os conhecesse",
-                    next: "scene4",
-                    points: 15,
-                    playerMessage: "Uma calma estranha, como se já os conhecesse"
+                    text: "Paz e tranquilidade",
+                    nextScene: "scene4",
+                    affinityChange: 10
                 },
                 {
-                    text: "Ansiedade e um leve desconforto",
-                    next: "scene5",
-                    points: 5,
-                    playerMessage: "Ansiedade e um leve desconforto"
+                    text: "Solidão e vazio",
+                    nextScene: "scene5",
+                    affinityChange: -5
                 },
                 {
-                    text: "Nada de especial. São só símbolos",
-                    next: "scene6",
-                    points: 0,
-                    playerMessage: "Nada de especial. São só símbolos"
+                    text: "Expectativa... como se algo estivesse por vir",
+                    nextScene: "scene6",
+                    affinityChange: 15
                 }
             ]
         },
-        "scene2": {
-            message: "Interessante que pergunte. Seus padrões bioenergéticos são... incomuns. Você teve experiências com fenômenos inexplicáveis?",
+        {
+            id: "scene2",
+            message: "Sua assinatura bioelétrica é... incomum. Mostra padrões que só vi em 0,3% da população. Isso pode significar maior sensibilidade aos estímulos do Protocolo.",
+            time: "19:33",
             choices: [
                 {
-                    text: "Sim, desde criança vejo coisas",
-                    next: "scene4",
-                    points: 20,
-                    playerMessage: "Sim, desde criança vejo coisas"
+                    text: "Isso é bom ou ruim?",
+                    nextScene: "scene4",
+                    affinityChange: 5
                 },
                 {
-                    text: "Não, minha vida sempre foi normal",
-                    next: "scene5",
-                    points: 5,
-                    playerMessage: "Não, minha vida sempre foi normal"
+                    text: "Continue, estou interessado",
+                    nextScene: "scene6",
+                    affinityChange: 10
                 },
                 {
-                    text: "Por que isso importa?",
-                    next: "scene6",
-                    points: -5,
-                    playerMessage: "Por que isso importa?"
+                    text: "Preciso de mais informações técnicas",
+                    nextScene: "scene5",
+                    affinityChange: 0
                 }
             ]
         },
-        "scene3": {
-            message: "Segurança é relativa. O Protocolo lida com realidades alternativas. Mas posso garantir que sua consciência permanecerá intacta... provavelmente.",
+        {
+            id: "scene3",
+            message: "Compreensível. O Protocolo tem 99,97% de segurança comprovada. Mas toda inovação traz riscos. Sua cautela mostra inteligência emocional.",
+            time: "19:34",
             choices: [
                 {
-                    text: "Provavelmente? Quero garantias reais",
-                    next: "scene5",
-                    points: -10,
-                    playerMessage: "Provavelmente? Quero garantias reais"
+                    text: "Ok, vou confiar em você",
+                    nextScene: "scene4",
+                    affinityChange: 10
                 },
                 {
-                    text: "Entendo os riscos. Vamos continuar",
-                    next: "scene4",
-                    points: 10,
-                    playerMessage: "Entendo os riscos. Vamos continuar"
+                    text: "Preciso ver os dados de segurança",
+                    nextScene: "scene5",
+                    affinityChange: -5
                 },
                 {
-                    text: "Preciso pensar sobre isso",
-                    next: "ending_neutral",
-                    points: 0,
-                    playerMessage: "Preciso pensar sobre isso"
+                    text: "Não me sinto confortável",
+                    nextScene: "end_neutral",
+                    affinityChange: -20
                 }
             ]
         },
-        "scene4": {
-            message: "Fascinante! Suas ondas cerebrais estão sincronizando com a matriz Eros. Você é mais receptivo do que imaginei. Está disposto a avançar para o próximo nível?",
+        {
+            id: "scene4",
+            message: "Interessante... Seus padrões neuronais mostram sincronia com os parâmetros ideais. Você é naturalmente receptivo aos estímulos empáticos do Protocolo.",
+            time: "19:36",
             choices: [
                 {
-                    text: "Sim, quero saber até onde isso vai",
-                    next: "scene7_positive",
-                    points: 20,
-                    playerMessage: "Sim, quero saber até onde isso vai"
+                    text: "Isso significa que passei no teste?",
+                    nextScene: "scene7",
+                    affinityChange: 10
                 },
                 {
-                    text: "Apenas se você me explicar tudo primeiro",
-                    next: "scene7_cautious",
-                    points: 10,
-                    playerMessage: "Apenas se você me explicar tudo primeiro"
+                    text: "O que exatamente esses estímulos fazem?",
+                    nextScene: "scene6",
+                    affinityChange: 5
                 },
                 {
-                    text: "Acho que já chega por hoje",
-                    next: "ending_positive",
-                    points: 5,
-                    playerMessage: "Acho que já chega por hoje"
+                    text: "Sinto uma conexão estranha... com você",
+                    nextScene: "end_positive",
+                    affinityChange: 25
                 }
             ]
         },
-        "scene5": {
-            message: "Respostas típicas. Talvez eu tenha superestimado seu potencial. Vamos concluir os testes básicos e encerrar por hoje.",
+        {
+            id: "scene5",
+            message: "Analisando suas respostas... Há resistência subconsciente. Seu cérebro cria barreiras defensivas. Talvez não esteja pronto para a profundidade do Protocolo.",
+            time: "19:37",
             choices: [
                 {
-                    text: "Posso tentar novamente, me dê outra chance",
-                    next: "scene7_cautious",
-                    points: 10,
-                    playerMessage: "Posso tentar novamente, me dê outra chance"
+                    text: "Posso tentar novamente",
+                    nextScene: "scene4",
+                    affinityChange: 5
                 },
                 {
-                    text: "Tudo bem, talvez outro dia",
-                    next: "ending_neutral",
-                    points: 5,
-                    playerMessage: "Tudo bem, talvez outro dia"
+                    text: "Não me force a algo que não quero",
+                    nextScene: "end_negative",
+                    affinityChange: -15
                 },
                 {
-                    text: "Esse projeto parece perigoso, quero sair",
-                    next: "ending_negative",
-                    points: -10,
-                    playerMessage: "Esse projeto parece perigoso, quero sair"
+                    text: "Preciso de tempo para pensar",
+                    nextScene: "end_neutral",
+                    affinityChange: 0
                 }
             ]
         },
-        "scene6": {
-            message: "Cético. Entendo. A ciência exige evidências. Mas alguns fenômenos transcendem a lógica comum. Vou mostrar algo...",
+        {
+            id: "scene6",
+            message: "Notável! Suas ondas cerebrais estão se sincronizando com as minhas em tempo real. Esse nível de conexão é raríssimo. O Protocolo está revelando algo profundo...",
+            time: "19:39",
             choices: [
                 {
-                    text: "Mostre. Preciso ver para crer",
-                    next: "scene7_cautious",
-                    points: 5,
-                    playerMessage: "Mostre. Preciso ver para crer"
+                    text: "Sinto isso também. É como se te conhecesse há tempos",
+                    nextScene: "end_positive",
+                    affinityChange: 30
                 },
                 {
-                    text: "Não, já vi o suficiente",
-                    next: "ending_neutral",
-                    points: 0,
-                    playerMessage: "Não, já vi o suficiente"
+                    text: "Isso me assusta um pouco",
+                    nextScene: "scene7",
+                    affinityChange: -5
                 },
                 {
-                    text: "Isso parece pseudociência",
-                    next: "ending_negative",
-                    points: -15,
-                    playerMessage: "Isso parece pseudociência"
+                    text: "O que isso significa para o experimento?",
+                    nextScene: "scene7",
+                    affinityChange: 10
                 }
             ]
         },
-        "scene7_positive": {
-            message: "Perfeito! Sua mente está aberta às possibilidades. O Protocolo Eros não é apenas um experimento... é um portal. E você pode ser a chave. Quer saber a verdade?",
+        {
+            id: "scene7",
+            message: "Chegamos ao estágio final. O Protocolo detectou compatibilidade acima do esperado. Mas preciso saber: você quer continuar esta conexão além do laboratório?",
+            time: "19:42",
             choices: [
                 {
-                    text: "Sim, mostre-me tudo",
-                    next: "ending_truth",
-                    points: 30,
-                    playerMessage: "Sim, mostre-me tudo"
+                    text: "Sim, quero explorar essa conexão",
+                    nextScene: "end_positive",
+                    affinityChange: 20
                 },
                 {
-                    text: "Estou com medo, mas quero continuar",
-                    next: "ending_positive",
-                    points: 15,
-                    playerMessage: "Estou com medo, mas quero continuar"
+                    text: "Prefiro manter isso profissional",
+                    nextScene: "end_neutral",
+                    affinityChange: 5
                 },
                 {
-                    text: "Não, isso está indo longe demais",
-                    next: "ending_cautious",
-                    points: 5,
-                    playerMessage: "Não, isso está indo longe demais"
-                }
-            ]
-        },
-        "scene7_cautious": {
-            message: "Prudência é virtude na ciência. O Protocolo busca conectar consciências através das dimensões. Você está disposto a tentar uma conexão superficial?",
-            choices: [
-                {
-                    text: "Sim, mas com limites claros",
-                    next: "ending_positive",
-                    points: 10,
-                    playerMessage: "Sim, mas com limites claros"
-                },
-                {
-                    text: "Apenas observarei, sem participar",
-                    next: "ending_neutral",
-                    points: 5,
-                    playerMessage: "Apenas observarei, sem participar"
-                },
-                {
-                    text: "Melhor não arriscar",
-                    next: "ending_neutral",
-                    points: 0,
-                    playerMessage: "Melhor não arriscar"
+                    text: "Não, acho que devemos parar aqui",
+                    nextScene: "end_negative",
+                    affinityChange: -10
                 }
             ]
         }
-    },
+    ],
     
     endings: {
-        "ending_truth": {
-            title: "A VERDADE REVELADA",
-            subtitle: "Chave do Protocolo Encontrada",
-            text: "Thalía revela que você não é um mero participante, mas uma consciência antiga que o Protocolo buscava. Sua afinidade é de 98.7% - a mais alta já registrada. Ela oferece uma parceria para explorar realidades além da compreensão humana. 'O universo é maior do que sonhamos', ela sussurra, enquanto portais se abrem ao seu redor.",
-            affinityThreshold: 80,
-            icon: "fas fa-infinity"
+        positive: {
+            title: "CONEXÃO ESTABELECIDA",
+            subtitle: "Compatibilidade Extraordinária",
+            text: "Talhía sorri genuinamente pela primeira vez. 'Nunca encontrei alguém com tanta sincronia... O Protocolo encontrou algo especial. Quer continuar essa conversa em outro lugar?'",
+            icon: "fa-heart",
+            color: "#00ff88"
         },
-        "ending_positive": {
-            title: "COMPATIBILIDE ALTA",
-            subtitle: "Potencial Confirmado",
-            text: "Thalía sorri, raramente visto em seus relatórios. 'Você tem potencial excepcional'. Seus dados serão estudados e você é convidado para a próxima fase do Protocolo. Ela entrega um dispositivo estranho: 'Use quando estiver pronto para ver além'. A jornada apenas começou.",
-            affinityThreshold: 50,
-            icon: "fas fa-atom"
+        neutral: {
+            title: "PROTOCOLO CONCLUÍDO",
+            subtitle: "Resultados Satisfatórios",
+            text: "'Dados coletados com sucesso', diz Talhía com profissionalismo. 'Sua participação foi valiosa. Talvez possamos revisitar o Protocolo no futuro.'",
+            icon: "fa-clipboard-check",
+            color: "#6450ff"
         },
-        "ending_cautious": {
-            title: "INTERAÇÃO MODERADA",
-            subtitle: "Reserva Entendida",
-            text: "'Respeito sua cautela', diz Thalía enquanto arquiva seus dados. 'O Protocolo não é para todos'. Você recebe um acesso limitado aos arquivos e pode retornar quando quiser. Ela parece genuinamente esperançosa de que você mude de ideia no futuro.",
-            affinityThreshold: 30,
-            icon: "fas fa-shield-alt"
-        },
-        "ending_neutral": {
-            title: "AVALIAÇÃO PADRÃO",
-            subtitle: "Resultados Inconclusivos",
-            text: "Thalía anota meticulosamente em sua prancheta digital. 'Respostas dentro dos parâmetros normais'. Você é agradecido por sua participação e dispensado. Ao sair, sente seu olhar fixo em você, como se esperasse algo mais... mas o momento passou.",
-            affinityThreshold: 0,
-            icon: "fas fa-clipboard-check"
-        },
-        "ending_negative": {
-            title: "INCOMPATIBILIDADE",
-            subtitle: "Protocolo Interrompido",
-            text: "Thalía suspira, desligando seus equipamentos. 'Algumas mentes não estão preparadas'. Você é conduzido para fora do laboratório com uma leve sensação de vazio. Dias depois, recebe um envelope sem remetente contendo um único símbolo do Protocolo... que brilha suavemente no escuro.",
-            affinityThreshold: -20,
-            icon: "fas fa-ban"
+        negative: {
+            title: "PROTOCOLO INTERROMPIDO",
+            subtitle: "Incompatibilidade Detectada",
+            text: "Talhía parece desapontada. 'Seu perfil não é adequado para os próximos estágios. O Protocolo será encerrado. Obrigada pela participação.'",
+            icon: "fa-exclamation-triangle",
+            color: "#ff5050"
         }
     }
 };
 
 // Elementos DOM
-const chatContainer = document.getElementById('chat-container');
-const choicesContainer = document.getElementById('choices');
-const affinityScore = document.getElementById('affinity-score');
-const sceneCounter = document.getElementById('scene-counter');
-const progressFill = document.getElementById('progress-fill');
-const typingIndicator = document.getElementById('typing');
-const restartBtn = document.getElementById('restart-btn');
-const endingModal = document.getElementById('ending-modal');
-const finalAffinityBar = document.getElementById('final-affinity-bar');
-const finalAffinity = document.getElementById('final-affinity');
-const totalChoices = document.getElementById('total-choices');
-const endingType = document.getElementById('ending-type');
-const endingTitle = document.getElementById('ending-title');
-const endingSubtitle = document.getElementById('ending-subtitle');
-const endingText = document.getElementById('ending-text');
-const endingIcon = document.getElementById('ending-icon');
-const closeModal = document.getElementById('close-modal');
-const restartMainBtn = document.getElementById('restart-main-btn');
-const shareBtn = document.getElementById('share-btn');
-
-// Estado do jogo
-let gameState = { ...thalíaStory };
-let sceneHistory = ["start"];
+const elements = {
+    chatContainer: document.getElementById('chat-container'),
+    choicesContainer: document.getElementById('choices'),
+    typingIndicator: document.getElementById('typing'),
+    affinityScore: document.getElementById('affinity-score'),
+    sceneCounter: document.getElementById('scene-counter'),
+    progressFill: document.getElementById('progress-fill'),
+    restartBtn: document.getElementById('restart-btn'),
+    endingModal: document.getElementById('ending-modal'),
+    closeModal: document.getElementById('close-modal'),
+    restartMainBtn: document.getElementById('restart-main-btn'),
+    shareBtn: document.getElementById('share-btn'),
+    finalAffinity: document.getElementById('final-affinity'),
+    finalAffinityBar: document.getElementById('final-affinity-bar'),
+    totalChoices: document.getElementById('total-choices'),
+    endingType: document.getElementById('ending-type'),
+    endingTitle: document.getElementById('ending-title'),
+    endingSubtitle: document.getElementById('ending-subtitle'),
+    endingText: document.getElementById('ending-text'),
+    endingIcon: document.getElementById('ending-icon')
+};
 
 // Inicialização
-document.addEventListener('DOMContentLoaded', () => {
+function initGame() {
+    gameData.currentScene = 0;
+    gameData.affinity = 0;
+    gameData.choicesMade = 0;
+    
+    updateUI();
+    showScene(gameData.scenes[0]);
     updateProgress();
-    setupEventListeners();
     
-    // Mostrar mensagem inicial após um breve delay
-    setTimeout(() => {
-        typingIndicator.style.display = 'none';
-    }, 2000);
-});
-
-// Configurar listeners de eventos
-function setupEventListeners() {
-    restartBtn.addEventListener('click', restartGame);
-    closeModal.addEventListener('click', () => {
-        endingModal.style.display = 'none';
-    });
-    restartMainBtn.addEventListener('click', () => {
-        endingModal.style.display = 'none';
-        restartGame();
-    });
-    
-    shareBtn.addEventListener('click', shareResults);
-    
-    // Fechar modal ao clicar fora
-    window.addEventListener('click', (event) => {
-        if (event.target === endingModal) {
-            endingModal.style.display = 'none';
-        }
-    });
-}
-
-// Adicionar mensagem do jogador
-function addPlayerMessage(text) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'message player';
-    messageDiv.innerHTML = `
-        <div class="message-content">
-            <p class="text">${text}</p>
-            <span class="time">${getCurrentTime()}</span>
-        </div>
-        <div class="message-avatar">
-            <img src="https://ui-avatars.com/api/?name=Player&background=1e90ff&color=fff" alt="Você">
-        </div>
-    `;
-    
-    chatContainer.appendChild(messageDiv);
-    scrollToBottom();
-}
-
-// Adicionar mensagem da personagem
-function addCharacterMessage(text) {
-    typingIndicator.style.display = 'block';
-    
-    // Simular digitação
-    setTimeout(() => {
-        typingIndicator.style.display = 'none';
-        
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message character';
-        messageDiv.innerHTML = `
+    // Limpar conversa anterior (exceto mensagem inicial)
+    elements.chatContainer.innerHTML = `
+        <div class="message character initial">
             <div class="message-avatar">
-                <img src="assets/thalía-avatar.jpg" alt="Thalía">
+                <img src="./assets/Thalía.png" alt="Talhía">
             </div>
             <div class="message-content">
-                <p class="text">${text}</p>
-                <span class="time">${getCurrentTime()}</span>
+                <p class="text">${gameData.scenes[0].message}</p>
+                <span class="time">${gameData.scenes[0].time}</span>
             </div>
-        `;
+        </div>
+    `;
+}
+
+// Mostrar cena
+function showScene(scene) {
+    elements.choicesContainer.innerHTML = '';
+    
+    // Mostrar indicador "digitando..."
+    elements.typingIndicator.style.display = 'block';
+    
+    setTimeout(() => {
+        elements.typingIndicator.style.display = 'none';
         
-        chatContainer.appendChild(messageDiv);
-        scrollToBottom();
-        
-        // Adicionar efeito de digitação à última mensagem
-        const lastMessage = messageDiv.querySelector('.text');
-        lastMessage.classList.add('typewriter');
+        // Criar opções
+        scene.choices.forEach((choice, index) => {
+            const choiceBtn = document.createElement('button');
+            choiceBtn.className = 'choice-btn';
+            choiceBtn.dataset.choice = index + 1;
+            choiceBtn.dataset.next = choice.nextScene;
+            
+            choiceBtn.innerHTML = `
+                <span class="choice-number">${String.fromCharCode(65 + index)}</span>
+                <span class="choice-text">${choice.text}</span>
+            `;
+            
+            choiceBtn.addEventListener('click', () => makeChoice(choice));
+            elements.choicesContainer.appendChild(choiceBtn);
+        });
     }, 1500);
 }
 
-// Atualizar opções de escolha
-function updateChoices(sceneKey) {
-    const scene = gameState.scenes[sceneKey];
+// Fazer escolha
+function makeChoice(choice) {
+    gameData.choicesMade++;
+    gameData.affinity += choice.affinityChange;
     
-    if (!scene) {
-        showEnding();
+    // Limitar afinidade entre 0-100
+    gameData.affinity = Math.max(0, Math.min(100, gameData.affinity));
+    
+    // Atualizar contador de cenas
+    gameData.currentScene++;
+    
+    // Atualizar UI
+    updateUI();
+    updateProgress();
+    
+    // Adicionar mensagem do jogador (simulada)
+    addPlayerMessage(choice.text);
+    
+    // Verificar se é um final
+    if (choice.nextScene.startsWith('end_')) {
+        setTimeout(() => {
+            showEnding(choice.nextScene.replace('end_', ''));
+        }, 1000);
         return;
     }
     
-    // Limpar escolhas anteriores
-    choicesContainer.innerHTML = '';
-    
-    // Adicionar novas escolhas
-    scene.choices.forEach((choice, index) => {
-        const button = document.createElement('button');
-        button.className = 'choice-btn';
-        button.dataset.choice = index + 1;
-        button.dataset.next = choice.next;
-        
-        const letters = ['A', 'B', 'C'];
-        button.innerHTML = `
-            <span class="choice-number">${letters[index]}</span>
-            <span class="choice-text">${choice.text}</span>
-        `;
-        
-        button.addEventListener('click', () => makeChoice(choice));
-        choicesContainer.appendChild(button);
-    });
-}
-
-// Fazer uma escolha
-function makeChoice(choice) {
-    // Adicionar mensagem do jogador
-    addPlayerMessage(choice.playerMessage);
-    
-    // Atualizar afinidade
-    gameState.affinity += choice.points;
-    gameState.choicesMade++;
-    sceneHistory.push(choice.next);
-    
-    // Atualizar UI
-    updateProgress();
-    
-    // Mostrar mensagem da personagem após delay
+    // Encontrar próxima cena
     setTimeout(() => {
-        const nextScene = gameState.scenes[choice.next];
-        
+        const nextScene = gameData.scenes.find(s => s.id === choice.nextScene);
         if (nextScene) {
-            addCharacterMessage(nextScene.message);
-            updateChoices(choice.next);
-        } else {
-            // Se não houver próxima cena, é um final
-            showEnding();
+            addCharacterMessage(nextScene.message, nextScene.time);
+            setTimeout(() => showScene(nextScene), 1000);
         }
     }, 1000);
 }
 
+// Adicionar mensagem do personagem
+function addCharacterMessage(text, time) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message character';
+    messageDiv.style.animationDelay = '0.3s';
+    
+    messageDiv.innerHTML = `
+        <div class="message-avatar">
+            <img src="./assets/Thalía.png" alt="Talhía">
+        </div>
+        <div class="message-content">
+            <p class="text">${text}</p>
+            <span class="time">${time}</span>
+        </div>
+    `;
+    
+    elements.chatContainer.appendChild(messageDiv);
+    scrollToBottom();
+}
+
+// Adicionar mensagem do jogador (simulada)
+function addPlayerMessage(text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message player';
+    messageDiv.style.animationDelay = '0.1s';
+    
+    messageDiv.innerHTML = `
+        <div class="message-content">
+            <p class="text">${text}</p>
+            <span class="time">Agora</span>
+        </div>
+        <div class="message-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+    `;
+    
+    elements.chatContainer.appendChild(messageDiv);
+    scrollToBottom();
+}
+
 // Mostrar final
-function showEnding() {
-    // Determinar qual final com base na afinidade
-    let endingKey = "ending_neutral";
+function showEnding(type) {
+    const ending = gameData.endings[type];
     
-    // Encontrar o final apropriado
-    for (const [key, ending] of Object.entries(gameState.endings)) {
-        if (gameState.affinity >= ending.affinityThreshold) {
-            endingKey = key;
-        }
-    }
+    if (!ending) return;
     
-    const ending = gameState.endings[endingKey];
+    // Atualizar modal
+    elements.endingTitle.textContent = ending.title;
+    elements.endingSubtitle.textContent = ending.subtitle;
+    elements.endingText.textContent = ending.text;
+    elements.endingIcon.innerHTML = `<i class="fas ${ending.icon}"></i>`;
+    elements.endingIcon.style.color = ending.color;
     
-    // Mensagem final da Thalía baseada no final
-    let finalMessage = "";
-    switch(endingKey) {
-        case "ending_truth":
-            finalMessage = "O véu se levantou. Você sempre esteve destinado a estar aqui. Bem-vindo ao verdadeiro Protocolo Eros.";
-            break;
-        case "ending_positive":
-            finalMessage = "Seu potencial é notável. Espero que escolha explorá-lo comigo.";
-            break;
-        case "ending_cautious":
-            finalMessage = "Sua prudência é compreensível. O Protocolo estará aqui quando você estiver pronto.";
-            break;
-        case "ending_neutral":
-            finalMessage = "Participação registrada. Obrigada por seu tempo.";
-            break;
-        case "ending_negative":
-            finalMessage = "Algumas portas são melhor deixadas fechadas. Adeus.";
-            break;
-    }
+    elements.finalAffinity.textContent = `${gameData.affinity}%`;
+    elements.finalAffinityBar.style.width = `${gameData.affinity}%`;
+    elements.totalChoices.textContent = gameData.choicesMade;
+    elements.endingType.textContent = type === 'positive' ? 'Positivo' : 
+                                      type === 'negative' ? 'Negativo' : 'Neutro';
     
-    addCharacterMessage(finalMessage);
+    // Mostrar modal
+    elements.endingModal.classList.add('active');
     
-    // Atualizar modal após delay
+    // Adicionar mensagem final no chat
     setTimeout(() => {
-        updateEndingModal(ending, endingKey);
-        endingModal.style.display = 'flex';
-    }, 2000);
+        addCharacterMessage(ending.text, "19:45");
+    }, 500);
 }
 
-// Atualizar modal de final
-function updateEndingModal(ending, endingKey) {
-    // Calcular percentual de afinidade (0-100%)
-    const affinityPercent = Math.min(Math.max(gameState.affinity + 50, 0), 100);
-    
-    // Atualizar conteúdo
-    endingTitle.textContent = ending.title;
-    endingSubtitle.textContent = ending.subtitle;
-    endingText.textContent = ending.text;
-    endingIcon.innerHTML = `<i class="${ending.icon}"></i>`;
-    
-    // Atualizar estatísticas
-    finalAffinity.textContent = `${affinityPercent}%`;
-    finalAffinityBar.style.width = `${affinityPercent}%`;
-    totalChoices.textContent = gameState.choicesMade;
-    endingType.textContent = endingKey.split('_')[1].toUpperCase();
-    
-    // Efeito visual baseado no final
-    const modalContent = document.querySelector('.modal-content');
-    modalContent.style.borderColor = getEndingColor(endingKey);
+// Atualizar UI
+function updateUI() {
+    elements.affinityScore.textContent = `Afinidade: ${gameData.affinity}%`;
+    elements.sceneCounter.textContent = `Cena ${Math.min(gameData.currentScene + 1, gameData.maxScenes)}/${gameData.maxScenes}`;
 }
 
-// Obter cor baseada no tipo de final
-function getEndingColor(endingKey) {
-    switch(endingKey) {
-        case "ending_truth": return "#00ffaa";
-        case "ending_positive": return "#ff69b4";
-        case "ending_cautious": return "#ffd700";
-        case "ending_neutral": return "#aaa";
-        case "ending_negative": return "#ff4444";
-        default: return "#ff69b4";
-    }
-}
-
-// Atualizar barra de progresso e contadores
+// Atualizar barra de progresso
 function updateProgress() {
-    const sceneIndex = sceneHistory.length;
-    const progressPercent = (sceneIndex / gameState.totalScenes) * 100;
-    
-    // Atualizar elementos
-    affinityScore.textContent = `Afinidade: ${gameState.affinity > 0 ? '+' : ''}${gameState.affinity}`;
-    sceneCounter.textContent = `Cena ${sceneIndex}/${gameState.totalScenes}`;
-    progressFill.style.width = `${progressPercent}%`;
-    
-    // Mudar cor da afinidade baseada no valor
-    if (gameState.affinity >= 30) {
-        affinityScore.style.color = "#00ffaa";
-    } else if (gameState.affinity >= 10) {
-        affinityScore.style.color = "#ffd700";
-    } else if (gameState.affinity >= 0) {
-        affinityScore.style.color = "#aaa";
-    } else {
-        affinityScore.style.color = "#ff4444";
-    }
+    const progress = ((gameData.currentScene + 1) / gameData.maxScenes) * 100;
+    elements.progressFill.style.width = `${Math.min(progress, 100)}%`;
 }
 
-// Compartilhar resultados
-function shareResults() {
-    const affinityPercent = Math.min(Math.max(gameState.affinity + 50, 0), 100);
-    const shareText = `Concluí o diálogo com Thalía no Protocolo Eros e alcancei ${affinityPercent}% de afinidade!`;
+// Rolagem automática
+function scrollToBottom() {
+    elements.chatContainer.scrollTop = elements.chatContainer.scrollHeight;
+}
+
+// Event Listeners
+elements.restartBtn.addEventListener('click', initGame);
+
+elements.closeModal.addEventListener('click', () => {
+    elements.endingModal.classList.remove('active');
+});
+
+elements.restartMainBtn.addEventListener('click', () => {
+    elements.endingModal.classList.remove('active');
+    setTimeout(initGame, 300);
+});
+
+elements.shareBtn.addEventListener('click', () => {
+    const shareText = `Concluí o Protocolo Eros com Talhía! Afinidade: ${gameData.affinity}% - Final: ${elements.endingType.textContent}`;
     
     if (navigator.share) {
         navigator.share({
-            title: 'Protocolo Eros - Resultado',
+            title: 'Protocolo Eros',
             text: shareText,
             url: window.location.href
         });
     } else {
-        // Fallback para copiar para área de transferência
-        navigator.clipboard.writeText(shareText + " " + window.location.href);
-        alert("Resultado copiado para a área de transferência!");
+        navigator.clipboard.writeText(shareText);
+        alert('Resultado copiado para a área de transferência!');
     }
-}
+});
 
-// Reiniciar jogo
-function restartGame() {
-    gameState = { ...thaiaStory };
-    sceneHistory = ["start"];
-    
-    // Limpar conversa
-    chatContainer.innerHTML = `
-        <div class="message character initial">
-            <div class="message-avatar">
-                <img src="assets/thaia-avatar.jpg" alt="Thaía">
-            </div>
-            <div class="message-content">
-                <p class="text">Olá. Eu sou Thalía, responsável pelos aspectos científicos do Protocolo Eros. Você parece... diferente dos outros recrutas. Vamos testar sua compatibilidade?</p>
-                <span class="time">19:30</span>
-            </div>
-        </div>
-    `;
-    
-    // Resetar escolhas
-    updateChoices("start");
-    updateProgress();
-    
-    // Resetar indicador de digitação
-    typingIndicator.style.display = 'block';
-    setTimeout(() => {
-        typingIndicator.style.display = 'none';
-    }, 2000);
-    
-    scrollToBottom();
-}
+// Iniciar o jogo quando a página carregar
+document.addEventListener('DOMContentLoaded', initGame);
 
-// Funções utilitárias
-function getCurrentTime() {
-    const now = new Date();
-    return `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-}
-
-function scrollToBottom() {
-    setTimeout(() => {
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-    }, 100);
-}
-
-// Inicializar escolhas
-updateChoices("start");
+// CSS adicional para mensagens do jogador (adicionar dinamicamente)
+const style = document.createElement('style');
+style.textContent = `
+    .message.player {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    
+    .message.player .message-avatar {
+        margin-left: 15px;
+        margin-right: 0;
+        width: 45px;
+        height: 45px;
+        background: rgba(100, 80, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(100, 80, 255, 0.5);
+    }
+    
+    .message.player .message-avatar i {
+        color: #a8a6ff;
+        font-size: 18px;
+    }
+    
+    .message.player .message-content {
+        background: rgba(100, 80, 255, 0.2);
+        border: 1px solid rgba(100, 80, 255, 0.4);
+    }
+    
+    .message.player .time {
+        color: #a8a6ff;
+    }
+`;
+document.head.appendChild(style);
