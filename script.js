@@ -1,12 +1,12 @@
-// Dados da história de Thaía
-const thaiaStory = {
+// Dados da história de Thalía
+const thaliaStory = {
     currentScene: "start",
     affinity: 0,
     choicesMade: 0,
     totalScenes: 7,
     scenes: {
         "start": {
-            message: "Olá. Eu sou Thaía, responsável pelos aspectos científicos do Protocolo Eros. Você parece... diferente dos outros recrutas. Vamos testar sua compatibilidade?",
+            message: "Olá. Eu sou Thalía, responsável pelos aspectos científicos do Protocolo Eros. Você parece... diferente dos outros recrutas. Vamos testar sua compatibilidade?",
             choices: [
                 {
                     text: "Estou pronto. O que preciso fazer?",
