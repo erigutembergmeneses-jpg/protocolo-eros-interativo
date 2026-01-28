@@ -1,7 +1,7 @@
-# Protocolo Eros - Diálogo Interativo com Thaía
+# Protocolo Eros - Diálogo Interativo com Thalía
 
 ## 📋 Sobre
-Esta é uma experiência interativa baseada no livro "Protocolo Eros", permitindo que os leitores conversem com a personagem Thaía e influenciem o desenrolar da história através de suas escolhas.
+Esta é uma experiência interativa baseada no livro "Protocolo Eros", permitindo que os leitores conversem com a personagem Thalía e influenciem o desenrolar da história através de suas escolhas.
 
 ## 🚀 Como Usar
 
@@ -17,9 +17,9 @@ Esta é uma experiência interativa baseada no livro "Protocolo Eros", permitind
 
 ## 🎮 Como Jogar
 1. Escaneie o QR Code no livro
-2. Leia a mensagem inicial de Thaía
+2. Leia a mensagem inicial de Thalía
 3. Escolha uma das opções de resposta
-4. Suas escolhas afetam a afinidade com Thaía
+4. Suas escolhas afetam a afinidade com Thalía
 5. Continue até alcançar um dos 5 finais possíveis
 
 ## ✨ Recursos
@@ -33,7 +33,7 @@ Esta é uma experiência interativa baseada no livro "Protocolo Eros", permitind
 ## 🛠 Personalização
 
 ### Imagens:
-- Substitua `assets/thaia-avatar.jpg` pela imagem da personagem
+- Substitua `assets/thalia-avatar.jpg` pela imagem da personagem
 - Substitua `assets/background.jpg` pelo fundo desejado
 
 ### Conteúdo:
@@ -43,7 +43,7 @@ Esta é uma experiência interativa baseada no livro "Protocolo Eros", permitind
 ### QR Code:
 1. Gere um QR Code para o URL da sua versão hospedada
 2. Use ferramentas como [QR Code Generator](https://www.qr-code-generator.com/)
-3. Insira no livro próximo à descrição da Thaía
+3. Insira no livro próximo à descrição da Thalía
 
 ## 📊 Analytics (Opcional)
 Para rastrear engajamento:
