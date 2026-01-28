@@ -218,35 +218,35 @@ const thalíaStory = {
         "ending_truth": {
             title: "A VERDADE REVELADA",
             subtitle: "Chave do Protocolo Encontrada",
-            text: "Thaía revela que você não é um mero participante, mas uma consciência antiga que o Protocolo buscava. Sua afinidade é de 98.7% - a mais alta já registrada. Ela oferece uma parceria para explorar realidades além da compreensão humana. 'O universo é maior do que sonhamos', ela sussurra, enquanto portais se abrem ao seu redor.",
+            text: "Thalía revela que você não é um mero participante, mas uma consciência antiga que o Protocolo buscava. Sua afinidade é de 98.7% - a mais alta já registrada. Ela oferece uma parceria para explorar realidades além da compreensão humana. 'O universo é maior do que sonhamos', ela sussurra, enquanto portais se abrem ao seu redor.",
             affinityThreshold: 80,
             icon: "fas fa-infinity"
         },
         "ending_positive": {
             title: "COMPATIBILIDE ALTA",
             subtitle: "Potencial Confirmado",
-            text: "Thaía sorri, raramente visto em seus relatórios. 'Você tem potencial excepcional'. Seus dados serão estudados e você é convidado para a próxima fase do Protocolo. Ela entrega um dispositivo estranho: 'Use quando estiver pronto para ver além'. A jornada apenas começou.",
+            text: "Thalía sorri, raramente visto em seus relatórios. 'Você tem potencial excepcional'. Seus dados serão estudados e você é convidado para a próxima fase do Protocolo. Ela entrega um dispositivo estranho: 'Use quando estiver pronto para ver além'. A jornada apenas começou.",
             affinityThreshold: 50,
             icon: "fas fa-atom"
         },
         "ending_cautious": {
             title: "INTERAÇÃO MODERADA",
             subtitle: "Reserva Entendida",
-            text: "'Respeito sua cautela', diz Thaía enquanto arquiva seus dados. 'O Protocolo não é para todos'. Você recebe um acesso limitado aos arquivos e pode retornar quando quiser. Ela parece genuinamente esperançosa de que você mude de ideia no futuro.",
+            text: "'Respeito sua cautela', diz Thalía enquanto arquiva seus dados. 'O Protocolo não é para todos'. Você recebe um acesso limitado aos arquivos e pode retornar quando quiser. Ela parece genuinamente esperançosa de que você mude de ideia no futuro.",
             affinityThreshold: 30,
             icon: "fas fa-shield-alt"
         },
         "ending_neutral": {
             title: "AVALIAÇÃO PADRÃO",
             subtitle: "Resultados Inconclusivos",
-            text: "Thaía anota meticulosamente em sua prancheta digital. 'Respostas dentro dos parâmetros normais'. Você é agradecido por sua participação e dispensado. Ao sair, sente seu olhar fixo em você, como se esperasse algo mais... mas o momento passou.",
+            text: "Thalía anota meticulosamente em sua prancheta digital. 'Respostas dentro dos parâmetros normais'. Você é agradecido por sua participação e dispensado. Ao sair, sente seu olhar fixo em você, como se esperasse algo mais... mas o momento passou.",
             affinityThreshold: 0,
             icon: "fas fa-clipboard-check"
         },
         "ending_negative": {
             title: "INCOMPATIBILIDADE",
             subtitle: "Protocolo Interrompido",
-            text: "Thaía suspira, desligando seus equipamentos. 'Algumas mentes não estão preparadas'. Você é conduzido para fora do laboratório com uma leve sensação de vazio. Dias depois, recebe um envelope sem remetente contendo um único símbolo do Protocolo... que brilha suavemente no escuro.",
+            text: "Thalía suspira, desligando seus equipamentos. 'Algumas mentes não estão preparadas'. Você é conduzido para fora do laboratório com uma leve sensação de vazio. Dias depois, recebe um envelope sem remetente contendo um único símbolo do Protocolo... que brilha suavemente no escuro.",
             affinityThreshold: -20,
             icon: "fas fa-ban"
         }
@@ -275,7 +275,7 @@ const restartMainBtn = document.getElementById('restart-main-btn');
 const shareBtn = document.getElementById('share-btn');
 
 // Estado do jogo
-let gameState = { ...thaiaStory };
+let gameState = { ...thalíaStory };
 let sceneHistory = ["start"];
 
 // Inicialização
@@ -340,7 +340,7 @@ function addCharacterMessage(text) {
         messageDiv.className = 'message character';
         messageDiv.innerHTML = `
             <div class="message-avatar">
-                <img src="assets/thaia-avatar.jpg" alt="Thaía">
+                <img src="assets/thalía-avatar.jpg" alt="Thaía">
             </div>
             <div class="message-content">
                 <p class="text">${text}</p>
@@ -543,7 +543,7 @@ function restartGame() {
                 <img src="assets/thaia-avatar.jpg" alt="Thaía">
             </div>
             <div class="message-content">
-                <p class="text">Olá. Eu sou Thaía, responsável pelos aspectos científicos do Protocolo Eros. Você parece... diferente dos outros recrutas. Vamos testar sua compatibilidade?</p>
+                <p class="text">Olá. Eu sou Thalía, responsável pelos aspectos científicos do Protocolo Eros. Você parece... diferente dos outros recrutas. Vamos testar sua compatibilidade?</p>
                 <span class="time">19:30</span>
             </div>
         </div>
