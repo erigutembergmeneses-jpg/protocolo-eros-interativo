@@ -340,7 +340,7 @@ function addCharacterMessage(text) {
         messageDiv.className = 'message character';
         messageDiv.innerHTML = `
             <div class="message-avatar">
-                <img src="assets/thalía-avatar.jpg" alt="Thaía">
+                <img src="assets/thalía-avatar.jpg" alt="Thalía">
             </div>
             <div class="message-content">
                 <p class="text">${text}</p>
@@ -428,7 +428,7 @@ function showEnding() {
     
     const ending = gameState.endings[endingKey];
     
-    // Mensagem final da Thaía baseada no final
+    // Mensagem final da Thalía baseada no final
     let finalMessage = "";
     switch(endingKey) {
         case "ending_truth":
@@ -516,7 +516,7 @@ function updateProgress() {
 // Compartilhar resultados
 function shareResults() {
     const affinityPercent = Math.min(Math.max(gameState.affinity + 50, 0), 100);
-    const shareText = `Concluí o diálogo com Thaía no Protocolo Eros e alcancei ${affinityPercent}% de afinidade!`;
+    const shareText = `Concluí o diálogo com Thalía no Protocolo Eros e alcancei ${affinityPercent}% de afinidade!`;
     
     if (navigator.share) {
         navigator.share({
